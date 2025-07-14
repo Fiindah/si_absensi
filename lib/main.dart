@@ -1,0 +1,41 @@
+import 'package:aplikasi_absensi/view/auth_page/login_page.dart';
+import 'package:aplikasi_absensi/view/auth_page/register_page.dart';
+import 'package:aplikasi_absensi/view/buttom_navbar_page.dart';
+import 'package:aplikasi_absensi/view/check_in_page.dart';
+import 'package:aplikasi_absensi/view/check_out_page.dart';
+import 'package:aplikasi_absensi/view/dashboard_page.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+void main() {
+  initializeDateFormatting('id_ID', null).then((_) => runApp(const MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: "/",
+      routes: {
+        "/": (context) => const LoginPage(),
+        // WelcomePage.id: (context) => const WelcomePage(),
+        LoginPage.id: (context) => const LoginPage(),
+        RegisterPage.id: (context) => const RegisterPage(),
+        ButtonNavbarPage.id: (context) => const ButtonNavbarPage(),
+        DashboardPage.id: (context) => DashboardPage(),
+        CheckInPage.id: (context) => CheckInPage(),
+        CheckOutPage.id: (context) => CheckOutPage(),
+      },
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: 'Inter',
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
