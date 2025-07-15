@@ -5,6 +5,8 @@ class Endpoint {
   static const String baseUrlApi = "$baseUrl/api";
   static const String register = "$baseUrlApi/register";
   static const String login = "$baseUrlApi/login";
+  static const String forgotPassword = "$baseUrlApi/forgot-password";
+  static const String resetPassword = "$baseUrlApi/reset-password";
   static const String batches = "$baseUrlApi/batches";
   static const String trainings = "$baseUrlApi/trainings";
   static const String trainingDetail = "$baseUrlApi/trainings";

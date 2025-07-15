@@ -27,14 +27,22 @@ class _HistoryPageState extends State<HistoryPage> {
     return Scaffold(
       backgroundColor: AppColor.neutral,
       appBar: AppBar(
-        centerTitle: true,
         title: const Text(
           'Riwayat Kehadiran',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColor.myblue,
-        foregroundColor: Colors.white,
-        elevation: 0.5,
+        elevation: 0,
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppColor.myblue, AppColor.myblue1],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
       body: FutureBuilder<List<HistoryData>>(
         future: _futureHistory,

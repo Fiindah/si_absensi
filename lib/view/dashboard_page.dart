@@ -178,14 +178,22 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
       backgroundColor: AppColor.neutral,
       appBar: AppBar(
-        centerTitle: true,
         title: const Text(
           'Dashboard',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColor.myblue,
-        foregroundColor: Colors.white,
-        elevation: 0.5,
+        elevation: 0,
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppColor.myblue, AppColor.myblue1],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -193,29 +201,25 @@ class _DashboardPageState extends State<DashboardPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: AppColor.myblue.withOpacity(0.1),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _getGreeting(),
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    _getGreeting(),
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      _currentDate,
-                      style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    _currentDate,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: AppColor.gray88,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
               Row(
@@ -231,7 +235,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           }
                         });
                       },
-                      // icon: const Icon(Icons.login, color: Colors.white),
+
                       label: const Text(
                         "CHECK IN",
                         style: TextStyle(color: Colors.white),
@@ -257,7 +261,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           }
                         });
                       },
-                      // icon: const Icon(Icons.logout, color: Colors.white),
+
                       label: const Text(
                         "CHECK OUT",
                         style: TextStyle(color: Colors.white),
@@ -292,18 +296,13 @@ class _DashboardPageState extends State<DashboardPage> {
                         context: context,
                         builder:
                             (context) => AlertDialog(
-                              title: Text("Ajukan Izin"),
+                              title: Text(
+                                "Ajukan Izin",
+                                style: TextStyle(color: AppColor.myblue),
+                              ),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  TextField(
-                                    controller: alasanController,
-                                    decoration: InputDecoration(
-                                      hintText: "Masukkan alasan izin",
-                                    ),
-                                    maxLines: 3,
-                                  ),
-                                  const SizedBox(height: 12),
                                   TextField(
                                     controller: dateController,
                                     readOnly: true,
@@ -331,12 +330,23 @@ class _DashboardPageState extends State<DashboardPage> {
                                       }
                                     },
                                   ),
+                                  TextField(
+                                    controller: alasanController,
+                                    decoration: InputDecoration(
+                                      hintText: "Masukkan alasan izin",
+                                    ),
+                                    maxLines: 3,
+                                  ),
+                                  const SizedBox(height: 12),
                                 ],
                               ),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(context),
-                                  child: Text("Batal"),
+                                  child: Text(
+                                    "Batal",
+                                    style: TextStyle(color: AppColor.myblue),
+                                  ),
                                 ),
                                 TextButton(
                                   onPressed: () async {
@@ -371,16 +381,26 @@ class _DashboardPageState extends State<DashboardPage> {
                                       Navigator.pop(context);
                                     }
                                   },
-                                  child: Text("Kirim"),
+
+                                  child: Text(
+                                    "Kirim",
+                                    style: TextStyle(color: AppColor.myblue),
+                                  ),
                                 ),
                               ],
                             ),
                       );
                     },
 
-                    label: Text("Ajukan Izin"),
+                    label: Text(
+                      "Ajukan Izin",
+                      style: TextStyle(color: Colors.white),
+                    ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                     ),
                   ),
                 ),

@@ -205,10 +205,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Scaffold(
       backgroundColor: AppColor.neutral,
       appBar: AppBar(
-        foregroundColor: Colors.white,
-        title: const Text('Ubah Profil'),
+        title: const Text(
+          'Edit Profil',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
         backgroundColor: AppColor.myblue,
+        foregroundColor: Colors.white,
+        elevation: 0,
         centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppColor.myblue, AppColor.myblue1],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
       body:
           _isLoading
@@ -223,10 +236,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           _pickedImage != null
                               ? FileImage(_pickedImage!)
                               : NetworkImage(_profileImageUrl) as ImageProvider,
+                      backgroundColor: AppColor.myblue,
                     ),
                     TextButton.icon(
                       onPressed: _pickImage,
-                      icon: const Icon(Icons.camera_alt),
+                      icon: const Icon(
+                        Icons.camera_alt,
+                        color: AppColor.myblue,
+                        size: 20,
+                      ),
+                      style: TextButton.styleFrom(
+                        foregroundColor: AppColor.myblue,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 16,
+                        ),
+                      ),
                       label: const Text("Ubah Foto"),
                     ),
                     const SizedBox(height: 20),
@@ -277,7 +302,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               )
                               : const Text(
                                 'Simpan Perubahan',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
                     ),
                   ],

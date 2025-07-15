@@ -1,6 +1,7 @@
 import 'package:aplikasi_absensi/api/api_service.dart';
 import 'package:aplikasi_absensi/constant/app_color.dart';
 import 'package:aplikasi_absensi/helper/share_pref.dart';
+import 'package:aplikasi_absensi/view/auth_page/forgot_password.dart';
 import 'package:aplikasi_absensi/view/auth_page/register_page.dart';
 import 'package:aplikasi_absensi/view/buttom_navbar_page.dart';
 import 'package:flutter/material.dart';
@@ -106,20 +107,11 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.fingerprint, size: 100, color: AppColor.myblue2),
-                const SizedBox(height: 20),
-                const Text(
-                  '',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
+                Image.asset('assets/images/logo.png', width: 150, height: 150),
+
                 const SizedBox(height: 10),
                 Text(
-                  'Silakan masuk untuk melanjutkan',
+                  'Silakan login untuk melanjutkan',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
                 ),
@@ -163,12 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const ResetPasswordPage(),
-                      //   ),
-                      // );
+                      Navigator.pushNamed(context, ForgotPasswordPage.id);
                     },
                     child: Text(
                       "Lupa Kata Sandi?",

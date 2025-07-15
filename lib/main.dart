@@ -1,9 +1,12 @@
+import 'package:aplikasi_absensi/view/auth_page/forgot_password.dart';
 import 'package:aplikasi_absensi/view/auth_page/login_page.dart';
 import 'package:aplikasi_absensi/view/auth_page/register_page.dart';
+import 'package:aplikasi_absensi/view/auth_page/reset_password.dart';
 import 'package:aplikasi_absensi/view/buttom_navbar_page.dart';
 import 'package:aplikasi_absensi/view/check_in_page.dart';
 import 'package:aplikasi_absensi/view/check_out_page.dart';
 import 'package:aplikasi_absensi/view/dashboard_page.dart';
+import 'package:aplikasi_absensi/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -19,10 +22,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: "/",
       routes: {
-        "/": (context) => const LoginPage(),
+        "/": (context) => const SplashScreen(),
         // WelcomePage.id: (context) => const WelcomePage(),
         LoginPage.id: (context) => const LoginPage(),
         RegisterPage.id: (context) => const RegisterPage(),
+        ForgotPasswordPage.id: (context) => const ForgotPasswordPage(),
+        ResetPasswordPage.id: (context) => const ResetPasswordPage(),
         ButtonNavbarPage.id: (context) => const ButtonNavbarPage(),
         DashboardPage.id: (context) => DashboardPage(),
         CheckInPage.id: (context) => CheckInPage(),

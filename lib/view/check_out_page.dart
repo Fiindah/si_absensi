@@ -118,14 +118,23 @@ class _CheckOutPageState extends State<CheckOutPage> {
     return Scaffold(
       backgroundColor: AppColor.neutral,
       appBar: AppBar(
-        centerTitle: true,
         title: const Text(
-          'Absen Keluar',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          'Absen Pulang',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: AppColor.myblue,
         foregroundColor: Colors.white,
-        elevation: 0.5,
+        elevation: 0,
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [AppColor.myblue, AppColor.myblue1],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
       body:
           _currentPosition == null
