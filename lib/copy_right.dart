@@ -23,7 +23,7 @@ class CopyrightWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Center(
         child: Text(
-          '© $currentYear $companyName. $appName.',
+          ' $companyName. © $currentYear  $appName.',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: textColor ?? Colors.grey[600], // Warna teks default
