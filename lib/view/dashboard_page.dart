@@ -499,75 +499,76 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
 
-              const SizedBox(height: 24),
-              Text(
-                'Statistik Kehadiran',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.myblue,
-                ),
-              ),
-              const SizedBox(height: 12),
-              // Card Statistik Kehadiran
-              if (_isLoadingStats)
-                const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(20.0),
-                    child: CircularProgressIndicator(),
-                  ),
-                )
-              else if (_attendanceStats != null)
-                Card(
-                  elevation: 8, // Meningkatkan elevasi
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    side: BorderSide(
-                      color: AppColor.myblue.withOpacity(0.2),
-                      width: 1,
-                    ), // Tambah border tipis
-                  ),
-                  shadowColor: AppColor.myblue.withOpacity(
-                    0.4,
-                  ), // Warna bayangan
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildStatRow(
-                          title: 'Hadir',
-                          count: _attendanceStats!.totalMasuk,
-                          color: Colors.green,
-                          total:
-                              _attendanceStats!.totalMasuk +
-                              _attendanceStats!.totalIzin,
-                        ),
-                        const SizedBox(height: 12),
-                        _buildStatRow(
-                          title: 'Izin',
-                          count: _attendanceStats!.totalIzin,
-                          color: Colors.blueGrey,
-                          total:
-                              _attendanceStats!.totalMasuk +
-                              _attendanceStats!.totalIzin,
-                        ),
-                        const SizedBox(height: 20),
-                        AspectRatio(
-                          aspectRatio: 1.3,
-                          child: PieChart(
-                            PieChartData(
-                              sections: _getPieChartSections(_attendanceStats!),
-                              centerSpaceRadius: 30,
-                              sectionsSpace: 2,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+              // const SizedBox(height: 24),
+              // Text(
+              //   'Statistik Kehadiran',
+              //   style: TextStyle(
+              //     fontSize: 20,
+              //     fontWeight: FontWeight.bold,
+              //     color: AppColor.myblue,
+              //   ),
+              // ),
+              // const SizedBox(height: 12),
+              // // Card Statistik Kehadiran
+              // if (_isLoadingStats)
+              //   const Center(
+              //     child: Padding(
+              //       padding: EdgeInsets.all(20.0),
+              //       child: CircularProgressIndicator(),
+              //     ),
+              //   )
+              // else if (_attendanceStats != null)
+              //   Card(
+              //     elevation: 8, // Meningkatkan elevasi
+              //     color: Colors.white,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(16),
+              //       side: BorderSide(
+              //         color: AppColor.myblue.withOpacity(0.2),
+              //         width: 1,
+              //       ), // Tambah border tipis
+              //     ),
+              //     shadowColor: AppColor.myblue.withOpacity(
+              //       0.4,
+              //     ), // Warna bayangan
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(20),
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           _buildStatRow(
+              //             title: 'Hadir',
+              //             count: _attendanceStats!.totalMasuk,
+              //             color: Colors.green,
+              //             total:
+              //                 _attendanceStats!.totalMasuk +
+              //                 _attendanceStats!.totalIzin,
+              //           ),
+              //           const SizedBox(height: 12),
+              //           _buildStatRow(
+              //             title: 'Izin',
+              //             count: _attendanceStats!.totalIzin,
+              //             color: Colors.blueGrey,
+              //             total:
+              //                 _attendanceStats!.totalMasuk +
+              //                 _attendanceStats!.totalIzin,
+              //           ),
+              //           const SizedBox(height: 20),
+              //           AspectRatio(
+              //             aspectRatio: 1.3,
+              //             child: PieChart(
+              //               PieChartData(
+              //                 sections: _getPieChartSections(_attendanceStats!),
+              //                 centerSpaceRadius: 30,
+              //                 sectionsSpace: 2,
+              //               ),
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              SizedBox(height: 24),
               const CopyrightWidget(
                 appName: 'Endah F N', // Ganti dengan nama aplikasi Anda
                 companyName: 'Si Absensi', // Ganti dengan nama perusahaan Anda
