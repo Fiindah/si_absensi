@@ -1,18 +1,17 @@
-// lib/services/auth_service.dart
 import 'dart:convert';
-import 'dart:io'; // Import for File
+import 'dart:io';
 
 import 'package:aplikasi_absensi/api/endpoint.dart';
 import 'package:aplikasi_absensi/helper/share_pref.dart';
 import 'package:aplikasi_absensi/models/attendance_response.dart';
-import 'package:aplikasi_absensi/models/attendance_stats_model.dart'; // New import for AttendanceStats models
+import 'package:aplikasi_absensi/models/attendance_stats_model.dart';
 import 'package:aplikasi_absensi/models/history_page.dart';
 import 'package:aplikasi_absensi/models/izin_model.dart';
 import 'package:aplikasi_absensi/models/login_model.dart';
 import 'package:aplikasi_absensi/models/profil_photo_model.dart';
 import 'package:aplikasi_absensi/models/profile_model.dart';
 import 'package:aplikasi_absensi/models/register_model.dart';
-import 'package:flutter/foundation.dart'; // Import for debugPrint
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
@@ -517,25 +516,6 @@ class AuthService {
       );
     }
   }
-
-  // Future<AttendanceData?> fetchAttendanceData() async {
-  //   final token = await SharedPreferencesUtil.getAuthToken();
-  //   final url = Uri.parse(Endpoint.absenToday); // ganti sesuai endpoint kamu
-
-  //   final response = await http.get(
-  //     url,
-  //     headers: {'Authorization': 'Bearer $token', 'Accept': 'application/json'},
-  //   );
-
-  //   if (response.statusCode == 200) {
-  //     final jsonData = jsonDecode(response.body);
-  //     final attendance = AttendanceResponse.fromJson(jsonData);
-  //     return attendance.data;
-  //   } else {
-  //     debugPrint('Gagal mendapatkan data absensi');
-  //     return null;
-  //   }
-  // }
 
   // Metode untuk absensi masuk
   Future<AttendanceResponse> checkInAttendance({

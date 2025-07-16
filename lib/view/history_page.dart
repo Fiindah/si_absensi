@@ -75,34 +75,72 @@ class _HistoryPageState extends State<HistoryPage> {
                   'id_ID',
                 ).format(DateTime.parse(item.attendanceDate));
 
-                return Card(
-                  color: Colors.white,
+                return Container(
                   margin: const EdgeInsets.only(bottom: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.white, Colors.blue.shade50],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 6,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
                   ),
-                  elevation: 2,
                   child: ListTile(
-                    leading: Icon(
-                      item.status == 'masuk' ? Icons.check_circle : Icons.info,
-                      color:
-                          item.status == 'masuk' ? Colors.green : Colors.orange,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    leading: CircleAvatar(
+                      backgroundColor:
+                          item.status == 'masuk'
+                              ? Colors.green.withOpacity(0.1)
+                              : Colors.orange.withOpacity(0.1),
+                      child: Icon(
+                        item.status == 'masuk'
+                            ? Icons.check_circle
+                            : Icons.info_outline,
+                        color:
+                            item.status == 'masuk'
+                                ? Colors.green
+                                : Colors.orange,
+                      ),
                     ),
                     title: Text(
                       formattedDate,
-                      style: const TextStyle(fontWeight: FontWeight.w600),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Status: ${item.status}'),
-                        if (item.status == 'izin' && item.alasanIzin != null)
-                          Text('Alasan: ${item.alasanIzin}')
-                        else
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
                           Text(
-                            'Check In: ${item.checkInTime ?? '-'} | Check Out: ${item.checkOutTime ?? '-'}',
+                            'Status: ${item.status}',
+                            style: const TextStyle(fontSize: 14),
                           ),
-                      ],
+                          const SizedBox(height: 2),
+                          if (item.status == 'izin' && item.alasanIzin != null)
+                            Text(
+                              'Alasan: ${item.alasanIzin}',
+                              style: const TextStyle(fontSize: 14),
+                            )
+                          else
+                            Text(
+                              'Check In: ${item.checkInTime ?? '-'} | Check Out: ${item.checkOutTime ?? '-'}',
+                              style: const TextStyle(fontSize: 14),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -114,96 +152,3 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 }
-
-// import 'package:aplikasi_absensi/constant/app_color.dart';
-// import 'package:flutter/material.dart';
-// import 'package:intl/intl.dart';
-
-// class HistoryPage extends StatefulWidget {
-//   const HistoryPage({super.key});
-
-//   @override
-//   State<HistoryPage> createState() => _HistoryPageState();
-// }
-
-// class _HistoryPageState extends State<HistoryPage> {
-//   // Contoh data dummy
-//   final List<Map<String, dynamic>> history = [
-//     {
-//       'date': DateTime.now().subtract(const Duration(days: 0)),
-//       'status': 'Masuk',
-//       'time': '08:05',
-//     },
-//     {
-//       'date': DateTime.now().subtract(const Duration(days: 1)),
-//       'status': 'Izin',
-//       'time': '-',
-//     },
-//     {
-//       'date': DateTime.now().subtract(const Duration(days: 2)),
-//       'status': 'Masuk',
-//       'time': '08:12',
-//     },
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: AppColor.neutral,
-//       appBar: AppBar(
-//         centerTitle: true,
-//         title: const Text(
-//           'Riwayat Kehadiran',
-//           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-//         ),
-//         backgroundColor: AppColor.myblue,
-//         foregroundColor: Colors.white,
-//         elevation: 0.5,
-//       ),
-//       body:
-//           history.isEmpty
-//               ? const Center(
-//                 child: Text(
-//                   'Belum ada data kehadiran.',
-//                   style: TextStyle(fontSize: 16, color: Colors.grey),
-//                 ),
-//               )
-//               : ListView.builder(
-//                 padding: const EdgeInsets.all(16),
-//                 itemCount: history.length,
-//                 itemBuilder: (context, index) {
-//                   final item = history[index];
-//                   final formattedDate = DateFormat(
-//                     'EEEE, dd MMMM yyyy',
-//                     'id_ID',
-//                   ).format(item['date']);
-
-//                   return Card(
-//                     margin: const EdgeInsets.only(bottom: 12),
-//                     shape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(12),
-//                     ),
-//                     elevation: 2,
-//                     child: ListTile(
-//                       leading: Icon(
-//                         item['status'] == 'Masuk'
-//                             ? Icons.check_circle
-//                             : Icons.info,
-//                         color:
-//                             item['status'] == 'Masuk'
-//                                 ? Colors.green
-//                                 : Colors.orange,
-//                       ),
-//                       title: Text(
-//                         formattedDate,
-//                         style: const TextStyle(fontWeight: FontWeight.w600),
-//                       ),
-//                       subtitle: Text('Status: ${item['status']}'),
-//                       trailing: Text(item['time']),
-//                     ),
-//                   );
-//                 },
-//               ),
-//     );
-//   }
-// }

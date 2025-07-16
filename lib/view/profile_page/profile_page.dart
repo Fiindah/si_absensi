@@ -179,16 +179,15 @@ class _ProfilePageState extends State<ProfilePage> {
               ? const Center(child: CircularProgressIndicator())
               : RefreshIndicator(
                 onRefresh: _loadUserProfile,
-                color: AppColor.myblue, // Color of the refresh indicator
+                color: AppColor.myblue,
                 child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      // Profile Header Section
                       Column(
                         children: [
-                          SizedBox(height: 24), // Top padding
+                          SizedBox(height: 24),
                           CircleAvatar(
                             radius: 60,
                             backgroundColor: AppColor.myblue,
@@ -215,7 +214,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       Icons.person,
                                       size: 60,
                                       color: Colors.white,
-                                    ) // Fallback icon
+                                    )
                                     : null,
                           ),
                           const SizedBox(height: 20),
@@ -239,9 +238,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 24,
-                      ), // Spacing between header and info card
+                      const SizedBox(height: 24),
                       // User Information Card
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -260,8 +257,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                 _buildDivider(),
                                 _buildInfoRow(
-                                  Icons
-                                      .person_outline, // Changed icon for a softer look
+                                  Icons.person_outline,
                                   'Nama',
                                   _userProfile?.name ?? '-',
                                 ),
@@ -469,11 +465,9 @@ class _ProfilePageState extends State<ProfilePage> {
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              12,
-            ), // Slightly less rounded for a modern look
+            borderRadius: BorderRadius.circular(12),
           ),
-          elevation: 5, // Slightly more prominent shadow
+          elevation: 5,
           padding: const EdgeInsets.symmetric(vertical: 15),
         ),
       ),

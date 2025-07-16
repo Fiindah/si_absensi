@@ -1,5 +1,6 @@
 import 'package:aplikasi_absensi/api/api_service.dart';
 import 'package:aplikasi_absensi/constant/app_color.dart';
+import 'package:aplikasi_absensi/copy_right.dart';
 import 'package:aplikasi_absensi/helper/share_pref.dart';
 import 'package:aplikasi_absensi/view/auth_page/forgot_password.dart';
 import 'package:aplikasi_absensi/view/auth_page/register_page.dart';
@@ -218,6 +219,13 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ],
+                ),
+                const CopyrightWidget(
+                  appName: 'Endah F N', // Ganti dengan nama aplikasi Anda
+                  companyName:
+                      'Si Absensi', // Ganti dengan nama perusahaan Anda
+                  textColor: Colors.grey, // Opsional: Sesuaikan warna teks
+                  fontSize: 10.0, // Opsional: Sesuaikan ukuran font
                 ),
               ],
             ),

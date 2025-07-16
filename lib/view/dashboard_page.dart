@@ -1,5 +1,6 @@
 import 'package:aplikasi_absensi/api/api_service.dart';
 import 'package:aplikasi_absensi/constant/app_color.dart';
+import 'package:aplikasi_absensi/copy_right.dart';
 import 'package:aplikasi_absensi/models/attendance_model.dart';
 import 'package:aplikasi_absensi/models/attendance_stats_model.dart';
 import 'package:aplikasi_absensi/view/check_in_page.dart';
@@ -20,7 +21,6 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   final AuthService _authService = AuthService();
   String? _username;
-  // ProfileData? _profileData;
 
   String _currentDate = '';
   AttendanceData? _todayAttendance;
@@ -55,16 +55,6 @@ class _DashboardPageState extends State<DashboardPage> {
       _currentDate = formatter.format(now);
     });
   }
-
-  // String? _username;
-  // Future<void> _loadUserData() async {
-  //   final userData = await SharedPreferencesUtil.getUserData();
-  //   if (userData != null) {
-  //     setState(() {
-  //       _username = userData.name;
-  //     });
-  //   }
-  // }
 
   Future<void> _fetchTodayAttendanceStatus() async {
     setState(() => _isLoadingAttendance = true);
@@ -102,7 +92,11 @@ class _DashboardPageState extends State<DashboardPage> {
         setState(() => _attendanceStats = response.data);
       } else {
         if (!mounted) return;
-        _showMessage(context, response.message, color: Colors.red);
+        _showMessage(
+          context,
+          response.message ?? 'Gagal memuat statistik absensi.',
+          color: Colors.red,
+        );
       }
     } catch (e) {
       if (!mounted) return;
@@ -226,15 +220,13 @@ class _DashboardPageState extends State<DashboardPage> {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-
                 children: [
                   Text(
-                    // _getGreeting(),
-                    // _username ?? 'Pengguna',
                     '${_getGreeting()}, ${_username ?? 'Pengguna'}',
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
+                      color: AppColor.myblue,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -261,7 +253,6 @@ class _DashboardPageState extends State<DashboardPage> {
                           }
                         });
                       },
-
                       label: const Text(
                         "CHECK IN",
                         style: TextStyle(color: Colors.white),
@@ -287,7 +278,6 @@ class _DashboardPageState extends State<DashboardPage> {
                           }
                         });
                       },
-
                       label: const Text(
                         "CHECK OUT",
                         style: TextStyle(color: Colors.white),
@@ -303,151 +293,160 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 12),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 40,
-                  child: ElevatedButton.icon(
-                    onPressed: () async {
-                      final TextEditingController alasanController =
-                          TextEditingController();
-                      DateTime selectedDate = DateTime.now();
-                      final TextEditingController dateController =
-                          TextEditingController(
-                            text: DateFormat('dd-MM-yyyy').format(selectedDate),
-                          );
-                      await showDialog(
-                        context: context,
-                        builder:
-                            (context) => AlertDialog(
-                              backgroundColor: Colors.white,
-                              title: Text(
-                                "Ajukan izin",
-                                style: TextStyle(
-                                  color: AppColor.myblue,
-
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  TextField(
-                                    controller: dateController,
-                                    readOnly: true,
-                                    decoration: InputDecoration(
-                                      labelText: "Tanggal Izin",
-                                      suffixIcon: Icon(Icons.calendar_today),
-                                    ),
-                                    onTap: () async {
-                                      final picked = await showDatePicker(
-                                        context: context,
-                                        initialDate: selectedDate,
-                                        firstDate: DateTime(
-                                          DateTime.now().year - 1,
-                                        ),
-                                        lastDate: DateTime(
-                                          DateTime.now().year + 1,
-                                        ),
-                                        // locale: const Locale('id', 'ID'),
-                                      );
-                                      if (picked != null) {
-                                        selectedDate = picked;
-                                        dateController.text = DateFormat(
-                                          'yyyy-MM-dd',
-                                        ).format(picked);
-                                      }
-                                    },
-                                  ),
-                                  TextField(
-                                    controller: alasanController,
-                                    decoration: InputDecoration(
-                                      hintText: "Masukkan alasan izin",
-                                    ),
-                                    maxLines: 3,
-                                  ),
-                                  const SizedBox(height: 12),
-                                ],
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: Text(
-                                    "Batal",
-                                    style: TextStyle(color: AppColor.myblue),
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () async {
-                                    try {
-                                      final result = await _authService
-                                          .ajukanIzin(
-                                            alasanController.text,
-                                            dateController.text,
-                                          );
-                                      _fetchTodayAttendanceStatus();
-                                      _fetchAttendanceStats();
-                                      print(
-                                        "Izin berhasil diajukan: ${result.message}",
-                                      );
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        SnackBar(content: Text(result.message)),
-                                      );
-                                      Navigator.pop(context);
-                                    } catch (e) {
-                                      print("Error mengajukan izin: $e");
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            "Gagal mengajukan izin",
-                                          ),
-                                        ),
-                                      );
-                                      Navigator.pop(context);
-                                    }
-                                  },
-
-                                  child: Text(
-                                    "Kirim",
-                                    style: TextStyle(color: AppColor.myblue),
-                                  ),
-                                ),
-                              ],
-                            ),
-                      );
-                    },
-
-                    label: Text(
-                      "AJUKAN IZIN",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // const SizedBox(height: 12),
+              // Padding(
+              //   padding: const EdgeInsets.all(4.0),
+              //   child: SizedBox(
+              //     width: double.infinity,
+              //     height: 40,
+              //     child: ElevatedButton.icon(
+              //       onPressed: () async {
+              //         final TextEditingController alasanController =
+              //             TextEditingController();
+              //         DateTime selectedDate = DateTime.now();
+              //         final TextEditingController dateController =
+              //             TextEditingController(
+              //               text: DateFormat('dd-MM-yyyy').format(selectedDate),
+              //             );
+              //         await showDialog(
+              //           context: context,
+              //           builder:
+              //               (context) => AlertDialog(
+              //                 backgroundColor: Colors.white,
+              //                 title: Text(
+              //                   "Ajukan izin",
+              //                   style: TextStyle(
+              //                     color: AppColor.myblue,
+              //                     fontWeight: FontWeight.bold,
+              //                   ),
+              //                 ),
+              //                 content: Column(
+              //                   mainAxisSize: MainAxisSize.min,
+              //                   children: [
+              //                     TextField(
+              //                       controller: dateController,
+              //                       readOnly: true,
+              //                       decoration: const InputDecoration(
+              //                         labelText: "Tanggal Izin",
+              //                         suffixIcon: Icon(Icons.calendar_today),
+              //                       ),
+              //                       onTap: () async {
+              //                         final picked = await showDatePicker(
+              //                           context: context,
+              //                           initialDate: selectedDate,
+              //                           firstDate: DateTime(
+              //                             DateTime.now().year - 1,
+              //                           ),
+              //                           lastDate: DateTime(
+              //                             DateTime.now().year + 1,
+              //                           ),
+              //                         );
+              //                         if (picked != null) {
+              //                           selectedDate = picked;
+              //                           dateController.text = DateFormat(
+              //                             'yyyy-MM-dd',
+              //                           ).format(picked);
+              //                         }
+              //                       },
+              //                     ),
+              //                     TextField(
+              //                       controller: alasanController,
+              //                       decoration: const InputDecoration(
+              //                         hintText: "Masukkan alasan izin",
+              //                       ),
+              //                       maxLines: 3,
+              //                     ),
+              //                     const SizedBox(height: 12),
+              //                   ],
+              //                 ),
+              //                 actions: [
+              //                   TextButton(
+              //                     onPressed: () => Navigator.pop(context),
+              //                     child: Text(
+              //                       "Batal",
+              //                       style: TextStyle(color: AppColor.myblue),
+              //                     ),
+              //                   ),
+              //                   TextButton(
+              //                     onPressed: () async {
+              //                       try {
+              //                         final result = await _authService
+              //                             .ajukanIzin(
+              //                               alasanController.text,
+              //                               dateController.text,
+              //                             );
+              //                         _fetchTodayAttendanceStatus();
+              //                         _fetchAttendanceStats();
+              //                         print(
+              //                           "Izin berhasil diajukan: ${result.message}",
+              //                         );
+              //                         if (!mounted) return;
+              //                         ScaffoldMessenger.of(
+              //                           context,
+              //                         ).showSnackBar(
+              //                           SnackBar(content: Text(result.message)),
+              //                         );
+              //                         Navigator.pop(context);
+              //                       } catch (e) {
+              //                         print("Error mengajukan izin: $e");
+              //                         if (!mounted) return;
+              //                         ScaffoldMessenger.of(
+              //                           context,
+              //                         ).showSnackBar(
+              //                           const SnackBar(
+              //                             content: Text(
+              //                               "Gagal mengajukan izin",
+              //                             ),
+              //                           ),
+              //                         );
+              //                         Navigator.pop(context);
+              //                       }
+              //                     },
+              //                     child: Text(
+              //                       "Kirim",
+              //                       style: TextStyle(color: AppColor.myblue),
+              //                     ),
+              //                   ),
+              //                 ],
+              //               ),
+              //         );
+              //       },
+              //       label: const Text(
+              //         "AJUKAN IZIN",
+              //         style: TextStyle(color: Colors.white),
+              //       ),
+              //       style: ElevatedButton.styleFrom(
+              //         backgroundColor: Colors.orange,
+              //         shape: RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(30),
+              //         ),
+              //       ),
+              // ),
+              // ),
+              // ),
               const SizedBox(height: 24),
+              // Card Status Hari Ini
               Card(
-                elevation: 4,
+                elevation: 8, // Meningkatkan elevasi
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
+                  side: BorderSide(
+                    color: AppColor.myblue.withOpacity(0.2),
+                    width: 1,
+                  ), // Tambah border tipis
                 ),
+                shadowColor: AppColor.myblue.withOpacity(0.4), // Warna bayangan
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child:
                       _isLoadingAttendance
-                          ? const Center(child: CircularProgressIndicator())
+                          ? const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
                           : Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -459,31 +458,34 @@ class _DashboardPageState extends State<DashboardPage> {
                                   color: AppColor.myblue,
                                 ),
                               ),
-                              const Divider(height: 24, thickness: 1),
+                              const Divider(
+                                height: 24,
+                                thickness: 1,
+                                color: Colors.grey,
+                              ), // Perbaiki warna divider
 
                               if (_todayAttendance != null) ...[
                                 _buildInfoRow(
-                                  Icons.event_available,
+                                  // Icons.event_available,
                                   'Status',
                                   _todayAttendance!.status,
                                 ),
-
                                 if (_todayAttendance!.checkInTime != null)
                                   _buildInfoRow(
-                                    Icons.login,
+                                    // Icons.login,
                                     'Check-in',
                                     _todayAttendance!.checkInTime!,
                                   ),
                                 if (_todayAttendance!.checkOutTime != null)
                                   _buildInfoRow(
-                                    Icons.logout,
+                                    // Icons.logout,
                                     'Check-out',
                                     _todayAttendance!.checkOutTime!,
                                   ),
                                 if (_todayAttendance!.status.toLowerCase() ==
                                     'izin')
                                   _buildInfoRow(
-                                    Icons.info_outline,
+                                    // Icons.info_outline,
                                     'Alasan',
                                     _todayAttendance!.alasanIzin ?? '-',
                                   ),
@@ -507,15 +509,28 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
               ),
               const SizedBox(height: 12),
+              // Card Statistik Kehadiran
               if (_isLoadingStats)
-                const Center(child: CircularProgressIndicator())
+                const Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: CircularProgressIndicator(),
+                  ),
+                )
               else if (_attendanceStats != null)
                 Card(
+                  elevation: 8, // Meningkatkan elevasi
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
+                    side: BorderSide(
+                      color: AppColor.myblue.withOpacity(0.2),
+                      width: 1,
+                    ), // Tambah border tipis
                   ),
-                  elevation: 4,
+                  shadowColor: AppColor.myblue.withOpacity(
+                    0.4,
+                  ), // Warna bayangan
                   child: Padding(
                     padding: const EdgeInsets.all(20),
                     child: Column(
@@ -553,6 +568,12 @@ class _DashboardPageState extends State<DashboardPage> {
                     ),
                   ),
                 ),
+              const CopyrightWidget(
+                appName: 'Endah F N', // Ganti dengan nama aplikasi Anda
+                companyName: 'Si Absensi', // Ganti dengan nama perusahaan Anda
+                textColor: Colors.grey, // Opsional: Sesuaikan warna teks
+                fontSize: 10.0, // Opsional: Sesuaikan ukuran font
+              ),
             ],
           ),
         ),
@@ -560,39 +581,33 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Widget _buildInfoRow(IconData icon, String label, String value) {
+  Widget _buildInfoRow(String label, String value) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Icon(icon, color: AppColor.myblue, si
-          const SizedBox(width: 8),
+          // Icon(icon, color: AppColor.myblue, size: 20), // Menambahkan ikon
+          const SizedBox(width: 12), // Menambah jarak antara ikon dan teks
           Text(
             '$label:',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              color: AppColor.myblue,
+            ), // Warna teks label
           ),
-          const SizedBox(width: 6),
-          Expanded(child: Text(value, style: const TextStyle(fontSize: 14))),
+          const SizedBox(width: 8), // Menambah jarak antara label dan value
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(fontSize: 14, color: AppColor.gray88),
+            ),
+          ), // Warna teks value
         ],
       ),
     );
   }
-
-  // Widget _buildInfoRow(IconData icon, String label, String value) {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(vertical: 4.0),
-  //     child: Row(
-  //       children: [
-  //         Icon(icon, color: AppColor.gray88),
-  //         const SizedBox(width: 8),
-  //         Text('$label:', style: const TextStyle(fontWeight: FontWeight.bold)),
-  //         const SizedBox(width: 4),
-  //         Expanded(child: Text(value)),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   void _showMessage(
     BuildContext context,
