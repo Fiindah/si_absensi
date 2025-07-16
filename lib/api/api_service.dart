@@ -16,7 +16,6 @@ import 'package:flutter/foundation.dart'; // Import for debugPrint
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  // Metode untuk login pengguna
   Future<LoginResponse> login({
     required String email,
     required String password,
@@ -331,6 +330,11 @@ class AuthService {
         data: null,
       );
     }
+  }
+
+  Future<String?> getUsername() async {
+    final userData = await SharedPreferencesUtil.getUserData();
+    return userData?.name; // Mengakses properti 'name' dari objek ProfileData
   }
 
   // Metode untuk memperbarui profil pengguna (data teks)

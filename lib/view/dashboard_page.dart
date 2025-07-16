@@ -19,6 +19,8 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   final AuthService _authService = AuthService();
+  String? _username;
+  // ProfileData? _profileData;
 
   String _currentDate = '';
   AttendanceData? _todayAttendance;
@@ -32,6 +34,17 @@ class _DashboardPageState extends State<DashboardPage> {
     _initializeLocaleAndLoadData();
     _fetchTodayAttendanceStatus();
     _fetchAttendanceStats();
+    _loadUsername();
+  }
+
+  /// Metode untuk memuat nama pengguna dari AuthService
+  Future<void> _loadUsername() async {
+    final username =
+        await _authService
+            .getUsername(); // Memanggil metode baru dari AuthService
+    setState(() {
+      _username = username; // Memperbarui state _username
+    });
   }
 
   Future<void> _initializeLocaleAndLoadData() async {
@@ -42,6 +55,16 @@ class _DashboardPageState extends State<DashboardPage> {
       _currentDate = formatter.format(now);
     });
   }
+
+  // String? _username;
+  // Future<void> _loadUserData() async {
+  //   final userData = await SharedPreferencesUtil.getUserData();
+  //   if (userData != null) {
+  //     setState(() {
+  //       _username = userData.name;
+  //     });
+  //   }
+  // }
 
   Future<void> _fetchTodayAttendanceStatus() async {
     setState(() => _isLoadingAttendance = true);
@@ -206,7 +229,9 @@ class _DashboardPageState extends State<DashboardPage> {
 
                 children: [
                   Text(
-                    _getGreeting(),
+                    // _getGreeting(),
+                    // _username ?? 'Pengguna',
+                    '${_getGreeting()}, ${_username ?? 'Pengguna'}',
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
