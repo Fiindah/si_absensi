@@ -161,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                       "Lupa Kata Sandi?",
                       style: TextStyle(
                         fontSize: 14,
-                        color: AppColor.orange,
+                        color: AppColor.myblue,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

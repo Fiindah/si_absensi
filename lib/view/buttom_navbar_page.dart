@@ -1,7 +1,6 @@
 import 'package:aplikasi_absensi/constant/app_color.dart';
 import 'package:aplikasi_absensi/view/dashboard_page.dart';
 import 'package:aplikasi_absensi/view/history_page.dart';
-import 'package:aplikasi_absensi/view/maps_page.dart';
 import 'package:aplikasi_absensi/view/profile_page/profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +16,7 @@ class _ButtonNavbarPageState extends State<ButtonNavbarPage> {
   int _selectedIndex = 0;
   late PageController _pageController;
 
-  final List<Widget> _pages = [
-    DashboardPage(),
-    MapsPage(),
-    HistoryPage(),
-    ProfilePage(),
-  ];
+  final List<Widget> _pages = [DashboardPage(), HistoryPage(), ProfilePage()];
 
   @override
   void initState() {
@@ -65,7 +59,6 @@ class _ButtonNavbarPageState extends State<ButtonNavbarPage> {
             icon: Icon(Icons.home_outlined),
             label: 'Beranda',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: 'Map'),
           BottomNavigationBarItem(icon: Icon(Icons.alarm), label: 'Riwayat'),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_2_outlined),

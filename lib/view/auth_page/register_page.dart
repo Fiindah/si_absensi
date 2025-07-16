@@ -201,7 +201,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 16),
                       _buildTitle("Nama Lengkap"),
                       const SizedBox(height: 12),
                       _buildTextField(
@@ -214,7 +214,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 16),
 
                       _buildTitle("Jenis Kelamin"),
                       const SizedBox(height: 12),
@@ -280,7 +280,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 16),
 
                       // Dropdown Batch
                       _buildTitle("Batch"),
@@ -353,7 +353,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               return null;
                             },
                           ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 16),
 
                       // Dropdown Training - Fixed overflow issue
                       _buildTitle("Training"),
@@ -431,7 +431,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               return null;
                             },
                           ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 16),
 
                       _buildTitle("Kata Sandi"),
                       const SizedBox(height: 12),

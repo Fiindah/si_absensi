@@ -76,6 +76,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 ).format(DateTime.parse(item.attendanceDate));
 
                 return Card(
+                  color: Colors.white,
                   margin: const EdgeInsets.only(bottom: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),

@@ -203,6 +203,7 @@ class _DashboardPageState extends State<DashboardPage> {
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+
                 children: [
                   Text(
                     _getGreeting(),
@@ -277,7 +278,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                 ],
               ),
-
+              SizedBox(height: 12),
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: SizedBox(
@@ -290,15 +291,20 @@ class _DashboardPageState extends State<DashboardPage> {
                       DateTime selectedDate = DateTime.now();
                       final TextEditingController dateController =
                           TextEditingController(
-                            text: DateFormat('yyyy-MM-dd').format(selectedDate),
+                            text: DateFormat('dd-MM-yyyy').format(selectedDate),
                           );
                       await showDialog(
                         context: context,
                         builder:
                             (context) => AlertDialog(
+                              backgroundColor: Colors.white,
                               title: Text(
-                                "Ajukan Izin",
-                                style: TextStyle(color: AppColor.myblue),
+                                "Ajukan izin",
+                                style: TextStyle(
+                                  color: AppColor.myblue,
+
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               content: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -393,7 +399,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     },
 
                     label: Text(
-                      "Ajukan Izin",
+                      "AJUKAN IZIN",
                       style: TextStyle(color: Colors.white),
                     ),
                     style: ElevatedButton.styleFrom(
@@ -408,6 +414,7 @@ class _DashboardPageState extends State<DashboardPage> {
               const SizedBox(height: 24),
               Card(
                 elevation: 4,
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -479,6 +486,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 const Center(child: CircularProgressIndicator())
               else if (_attendanceStats != null)
                 Card(
+                  color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
