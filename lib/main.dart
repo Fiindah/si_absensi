@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       routes: {
         "/": (context) => const SplashScreen(),
-        // WelcomePage.id: (context) => const WelcomePage(),
         LoginPage.id: (context) => const LoginPage(),
         RegisterPage.id: (context) => const RegisterPage(),
         ForgotPasswordPage.id: (context) => const ForgotPasswordPage(),
@@ -33,12 +32,11 @@ class MyApp extends StatelessWidget {
         CheckInPage.id: (context) => CheckInPage(),
         CheckOutPage.id: (context) => CheckOutPage(),
       },
-      title: 'Flutter Demo',
+      title: 'Aplikasi Absensi',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Inter',
-        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       debugShowCheckedModeBanner: false,
     );

@@ -1,4 +1,4 @@
-package com.example.aplikasi_absensi
+package com.endah.aplikasi_absensi
 
 import io.flutter.embedding.android.FlutterActivity
 
